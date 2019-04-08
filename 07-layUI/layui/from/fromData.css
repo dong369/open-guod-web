@@ -1,0 +1,52 @@
+/* 添加按钮 */
+.addbutt {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 0px;
+    margin-bottom: 22px;
+    border-top: 1px solid #E4E4E4;
+}
+
+.addbutt .layui-btn {
+    margin: 15px 0 0 20px;
+}
+
+.addcenter,
+.mechanism,
+.updatecenter {
+    width: 500px;
+    margin: 0 auto;
+    padding: 0px 100px;
+    display: none;
+    position: relative;
+    text-align: center;
+}
+
+.addcenter .layui-form-item .layui-btn,
+.updatecenter .layui-form-item .layui-btn {
+    background: #01AAED;
+    width: 120px;
+}
+
+.addcenter .layui-form-item,
+.updatecenter .layui-form-item {
+    width: 500px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.addcenter .layui-form-item .layui-btn,
+.updatecenter .layui-form-item .layui-btn {
+    width: 70px;
+}
+
+.addcenter .layui-form-item .layui-btn:nth-child(2),
+.updatecenter .layui-form-item .layui-btn:nth-child(2) {
+    border: 1px solid #e4e4e4;
+    background: transparent;
+}
+
+.addcenter .layui-form-item .layui-input-inline,
+.updatecenter .layui-form-item .layui-input-inline {
+    width: 300px;
+}

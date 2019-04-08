@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://www.jq22.com/jquery/jquery-1.9.1.js"></script>
+    <title>jQuery对象转JavaScript</title>
+</head>
+
+<body>
+    <ol>
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ol>
+</body>
+<script>
+    var $li = $("li");
+    // jQuery对象转DOM对象：方式一
+    var li01 = $li[0];
+    // jQuery对象转DOM对象：方式二
+    var li02 = $li.get(1);
+    alert(li01.innerHTML);
+</script>
+
+</html>

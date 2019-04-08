@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <title>vue事件对象</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 事件对象 -->
+        <input type="button" value="事件对象按钮" @click="fun($event)">
+        <!-- 事件冒泡：方式一可以通过事件对象处理ev.cancelBubble=true；方式二通过vue带的stop -->
+        <div @click="show02()">
+            <input type="button" value="事件冒泡" @click.stop="show01()">
+        </div>
+        <!-- 事件的默认行为：方式一通过事件对象处理ev.preventDefault()；方式二通过vue带的prevent -->
+        <input type="button" value="默认行为" @contextmenu.prevent="show03()">
+        <!-- 键盘事件 -->
+        <input type="text" @keydown="show04($event)" placeholder="keydown键盘事件">
+        <input type="text" @keyup="show04($event)" placeholder="keyup键盘事件">
+        <input type="text" @keyup.13="show01()" placeholder="13回车执行">
+        <input type="text" @keyup.enter="show01()" placeholder="enter回车执行">
+        <input type="text" @keyup.up="show01()" placeholder="上箭头执行">
+        <input type="text" @keyup.down="show01()" placeholder="下箭头执行">
+        <input type="text" @keyup.left="show01()" placeholder="左箭头执行">
+        <input type="text" @keyup.right="show01()" placeholder="右箭头执行">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            fun: function (e) {
+                alert(e);
+            },
+            show01: function () {
+                alert("show01");
+            },
+            show02: function () {
+                alert("show02");
+            },
+            show03: function () {
+                alert("show03");
+            },
+            show04: function (ev) {
+                alert(ev.keyCode);
+            }
+        }
+    });
+</script>
+
+</html>

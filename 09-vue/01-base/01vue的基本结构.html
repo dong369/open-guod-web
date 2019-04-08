@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- vuejs不依赖与jQuery -->
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <title>第一个vue页面</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 注意：页面的显示不需要加vue实例对象的名称：vm.q.test -->
+        {{message}}
+        <br>
+        {{q.message}}
+        <hr>
+        <button @click="fun01">按钮</button>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        // 01选择绑定的div元素
+        el: "#app",
+        // 02数据
+        data: {
+            message: "hello world vue!",
+            q: {
+                message: "你好vue!"
+            }
+        },
+        methods: {
+            fun01: function () {
+                // vm == this，`this` 指向 vm 实例
+                var _this = this;
+                console.log(vm === this);
+                console.log(_this == this);
+                alert(vm.message);
+            }
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://www.jq22.com/jquery/jquery-1.9.1.js"></script>
+    <title>JavaScript对象转jQuery对象</title>
+</head>
+
+<body>
+    <ul>
+        <li>html</li>
+        <li>css</li>
+        <li>javascript</li>
+        <li>jquery</li>
+    </ul>
+</body>
+<script>
+    // 标签名称
+    var li = document.getElementsByTagName("li");
+    for (var i = 0; i < li.length; i++) {
+        console.log(li[i].innerHTML);
+    }
+    // JavaScript对象转jQuery对象操作
+    var $li = $(li);
+    alert($li.html());
+</script>
+
+</html>

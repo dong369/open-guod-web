@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <script src="../../00-common/jsLibs/vue/vue-resource.min.js"></script>
+    <title>09vue数据交互+vue-resource</title>
+</head>
+<style></style>
+
+<body>
+    <div id="app">
+        <input type="button" value="resource数据交互按钮get方式" @click="get()">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            get: function () {
+                this.$http.get('/README.md').then(function (req) {
+                    alert(req.status);
+                    console.log(req.data);
+                }, function (res) {
+                    console.log(res.status);
+                });
+            }
+        }
+    });
+</script>
+
+</html>

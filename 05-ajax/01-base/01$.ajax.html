@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$.ajax进行接口调用</title>
+    <script src="http://www.jq22.com/jquery/jquery-1.7.1.js"></script>
+</head>
+
+<body>
+<button id="btn">点击</button>
+</body>
+<script>
+    // 后台：使用对象接收（DataVo vo或@RequestParam Map<String, Object> params）
+    // 前台：用Map接收前端提交的Form Data或Query String，如果有相同的参数名，只接收第一个
+    $(function () {
+        $("#btn").click(function () {
+            $(function () {
+                $.ajax({
+                    url: "http://localhost:11601/lean/doSaveUserJsonMapObj",
+                    type: "POST",
+                    // 解析成JSON字符串
+                    data: {
+                        userName: "guod",
+                        age: 12
+                    },
+                    dataType: "JSON",
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log(data.code);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+</html>

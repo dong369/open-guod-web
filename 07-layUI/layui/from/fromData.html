@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表格渲染</title>
+    <script src="../../libs/layui-v2.4.5/layui/layui.js"></script>
+    <script src="../common/common.js"></script>
+    <link rel="stylesheet" href="../../libs/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="./fromData.css">
+</head>
+
+<body>
+    <form class="layui-form" action="" method="post" style="margin-top: 20px;">
+        <div class="layui-form-item">
+            <!-- 输入框组件 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名 : </label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 日期框组件 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">时间组件</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="startDate" id="startDate" placeholder="操作开始时间" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 选择框组件 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">选择框</label>
+                <div class="layui-input-block">
+                    <select name="city" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">北京</option>
+                        <option value="1">上海</option>
+                        <option value="2">广州</option>
+                        <option value="3">深圳</option>
+                        <option value="4">杭州</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 状态转换 -->
+            <div class="layui-inline">
+                <label class="layui-form-label">状态 : </label>
+                <div class="layui-input-inline">
+                    <input type="text" name="deleted" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- 查询操作 -->
+            <div class="layui-inline">
+                <span class="layui-btn" lay-submit lay-filter="formDemo" style="background: #01AAED; width: 70px;">搜索</span>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+            <!-- CRUD -->
+            <script type="text/html" id="toolbarDemo">
+                <div class="layui-btn-container">
+                            <button class="layui-btn layui-btn-sm" lay-event="update" style="background:#01AAED;">编辑</button>
+                            <button class="layui-btn layui-btn-sm" lay-event="disable" style="background: #ea4f56;">停用</button>
+                            <button class="layui-btn layui-btn-sm" lay-event="enable" style="background: #3cff56;">启用</button>
+                        </div>
+            </script>
+        </div>
+    </form>
+    <div class="addbutt"><button class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe608;</i> 添加</button></div>
+    <!-- 表格渲染 -->
+    <div class="main-content">
+        <table id="demo" lay-filter="tableEvent" class="layui-table"></table>
+    </div>
+    <!-- 新增用户 -->
+    <form class="layui-form  addcenter" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓 名 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">年 龄 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="age" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性 别 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="sex" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">城 市 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="city" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">时间组件</label>
+            <div class="layui-input-inline">
+                <input type="text" name="birthday" id="birthday" placeholder="时间" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <span class="layui-btn" lay-submit lay-filter="addSave">保存</span>
+            <button type="reset" class="layui-btn close layui-btn-primary">取消</button>
+        </div>
+    </form>
+    <!-- 编辑用户 -->
+    <form class="layui-form  updatecenter" action="" lay-filter="eideFilter">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓 名 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label">年 龄 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="age" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性 别 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="sex" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">城 市 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="city" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">出生日期 : </label>
+            <div class="layui-input-inline">
+                <input type="text" name="birthday" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <span class="layui-btn" lay-submit lay-filter="editSave">保存</span>
+            <button type="reset" class="layui-btn close layui-btn-primary">取消</button>
+        </div>
+    </form>
+</body>
+<script src="./fromData.js"></script>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://www.jq22.com/jquery/jquery-1.9.1.js"></script>
+    <title>$(this)+$(e)</title>
+</head>
+
+<body>
+    <!--
+	1.event.target与this的区别
+	 event.target表示发生点击事件的元素；
+     this表示的是注册点击事件的元素
+     this 等于 e.currentTarget
+	 注意：this是所有函数原生具有的.进入函数时,this已经直接有了目标对象。
+	       而e.target通过e再寻找target,中转了一下。所以相比较而言，this的执行效率更高些。
+	2.$(this.target)与$(this)比较的问题
+	 $(this.target)！=$(this)?比较的是两个对象。
+	 this == e.target；这样才能得出正确的结果。	
+	-->
+</body>
+<script>
+</script>
+
+</html>

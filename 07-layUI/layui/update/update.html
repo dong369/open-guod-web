@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>upload模块快速使用</title>
+    <link rel="stylesheet" href="../../libs/layui-v2.4.5/layui/css/layui.css" media="all">
+</head>
+
+<body>
+
+    <div class="layui-btn-container">
+        <a class="layui-btn btn-add btn-default" id="btn-excel">选择Excel文件</a>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <a class="layui-btn btn-add btn-default" id="btn-excel-sure">上传导入</a>
+    </div>
+
+
+    <script src="../../libs/layui-v2.4.5/layui/layui.js"></script>
+    <script>
+        layui.use('upload', function () {
+            var upload = layui.upload;
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#btn-excel',
+                url: 'http://10.9.4.107:10505/importExcel',
+                //,multiple: true
+                auto: false,
+                bindAction: '#btn-excel-sure',
+                //最大允许上传的文件大小 2M
+                size: 2048,
+                //允许上传的文件类型
+                accept: 'file',
+                //只上传pdf文档
+                exts: 'xlsx|xls',
+                done: function (res) {
+                    //上传完毕回调
+                    console.log(res)
+                    if (res.code == 1) { //成功的回调
+                        //do something （比如将res返回的图片链接保存到表单的隐藏域）
+                        $('#set-add-put input[name="fileName"]').val(res.data.fileName);
+
+                        layer.msg(res.msg, {
+                            icon: 6
+                        });
+                        location.reload();
+                    } else {
+                        layer.msg(res.msg, {
+                            icon: 5
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

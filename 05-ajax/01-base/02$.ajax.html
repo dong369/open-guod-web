@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$.ajax进行接口调用</title>
+    <script src="http://www.jq22.com/jquery/jquery-1.7.1.js"></script>
+</head>
+
+<body>
+<button>点击</button>
+</body>
+<script>
+    // 后台：json对象（@RequestBody DataVo vo或@RequestBody Map<String, Object> params进行接收）
+    // 前台：用Map接收前端提交的json格式的Request Payload，如果有相同的参数名，只接收最后一个
+    // 注意：在jquery的ajax中，contentType都是默认的值：application/x-www-form-urlencoded
+    $("button").click(function () {
+        $(function () {
+            let dataObject = {
+                "userName": "guod",
+                "age": "12"
+            };
+            $.ajax({
+                url: "http://localhost:11601/lean/doSaveUserJsonStr",
+                type: "POST",
+                // 解析成JSON字符串
+                data: JSON.stringify(dataObject),
+                dataType: "JSON",
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>
+
+</html>

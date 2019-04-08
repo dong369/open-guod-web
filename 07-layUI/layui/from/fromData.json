@@ -1,0 +1,16 @@
+{
+    "code": 200,
+    "message": "请求成功！",
+    "total": 11,
+    "rows": [{
+        "id": 1,
+        "username": "用戶",
+        "age": 23,
+        "sex": "男",
+        "city": "城市",
+        "status": 57,
+        "createTime": 57,
+        "updateTime": 57,
+        "delete": 1
+    }]
+}

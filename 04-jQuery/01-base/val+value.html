@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>属性操作</title>
+    <script src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="test">
+        <input type="checkbox" name="checkbox" value="java" id="che01">
+        <input type="checkbox" name="checkbox" value="javascript" id="che02">
+        <ul>
+            <li>01</li>
+            <li>02</li>
+            <li>03</li>
+        </ul>
+    </div>
+</body>
+<script>
+    // 01 获取value属性值
+    var oLi = $("#che01").val();
+    var attr = document.getElementById("che02").value;
+    console.log(oLi + "," + attr);
+    // 02 赋值操作
+    $("#che01").val('JAVA');
+    document.getElementById("che02").value = 'JAVASCRIPT';
+</script>
+
+</html>

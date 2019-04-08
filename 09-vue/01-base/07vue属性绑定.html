@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <title>03vue数据属性绑定</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 语法：v-bind:title="";简写：:title="" -->
+        <input type="text" v-bind:title="q.title">
+        <br>
+        <input type="text" v-model="q.msg" :title="q.title">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        // 01选择绑定的div元素
+        el: "#app",
+        // 02数据
+        data: {
+            message: "hello world vue!",
+            q: {
+                msg: "test",
+                title: "鼠标放上去了"
+            }
+        }
+    });
+</script>
+
+</html>

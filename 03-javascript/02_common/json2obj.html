@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="but">按钮</button>
+</body>
+<script>
+    // JSON字符串
+    var jsonStr = '{ "name": "cxh", "sex": "man" }';
+    // JSON对象
+    var jsonObj = {
+        "name": "cxh",
+        "sex": "man"
+    };
+    // 01JSON字符串转JSON对象
+    var obj1 = eval('(' + jsonStr + ')');
+    var obj2 = $.parseJSON(jsonStr);
+    var obj3 = JSON.parse(jsonStr);
+    alert(jsonObj.name);
+    // 02JSON对象字符串转JSON字符串
+    var objStr = JSON.stringify(obj1);
+    alert(objStr);
+</script>
+
+</html>

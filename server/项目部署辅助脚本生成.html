@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>新客服正式环境部署辅助工具 - by 马凯</title>
+	<script>
+		// 10.237.3.13上面启动了个app-zuul,不知道啥用,未加
+		var ipList = [
+			// 阿里云服务地址:[0]
+			"10.238.2.104",
+			// 发行系统4A服务:[1]
+			"10.237.5.13",
+			// 95呼叫中心系统:[2]
+			"10.248.10.66",
+			// 车载WiFi项目：[3]
+			"10.248.2.10",
+			// 项目管理系统：[4]
+			"10.9.254.182"
+		]
+		var service = [{
+			name: "RMS系统-Three服务器",
+			value: "rms_three-1.0.0.jar",
+			path: "/usr/local/rms/three",
+			ip: [0]
+		}, {
+			name: "4A模块项目部署",
+			value: "owinfo-etc-service-4A.jar",
+			path: "/home/kaifa/project",
+			ip: [1]
+		}, {
+			name: "95呼叫中心系统",
+			value: "etc-user-SNAPSHOT.jar",
+			path: "/home/kaifa/project",
+			ip: [2]
+		}, {
+			name: "车载WiFi项目",
+			value: "isp_wifi-1.0.0.jar",
+			path: "/usr/local/crm-server/wifi7120",
+			ip: [3]
+		}, {
+			name: "车载WiFi项目",
+			value: "isp-project-1.0.0.jar",
+			path: "/usr/local/service/crm-test",
+			ip: [4]
+		}]
+	</script>
+</head>
+
+<table id="myTable">
+	<tr></tr>
+</table>
+<div id="myDiv"></div>
+<div><button id="btn">一键生成脚本</button><button id="allSelect">全选/反选</button></div>
+<div id="hello"></div>
+<textarea></textarea>
+
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script>
+	//日期格式化
+	Date.prototype.toString = function (fmt) {
+		let o = {
+			"M+": this.getMonth() + 1, //月份
+			"d+": this.getDate(), //日
+			"H+": this.getHours(), //小时
+			"m+": this.getMinutes(), //分
+			"s+": this.getSeconds(), //秒
+			"q+": Math.floor((this.getMonth() + 3) / 3), //季度
+			"S": this.getMilliseconds() //毫秒
+		};
+		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+		for (let k in o)
+			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[
+				k]).substr(("" + o[k]).length)));
+		return fmt;
+	};
+
+	// 字符串占位符
+	String.prototype.format = function () {
+		if (arguments.length == 0) return this;
+		var param = arguments[0];
+		var s = this;
+		if (typeof (param) == 'object') {
+			for (var key in param)
+				s = s.replace(new RegExp("\\{" + key + "\\}", "g"), param[key]);
+			return s;
+		}
+		for (var i = 0; i < arguments.length; i++)
+			s = s.replace(new RegExp("\\{" + i + "\\}", "g"), arguments[i]);
+		return s;
+
+	}
+
+
+	for (var i = 0; i < service.length; i++) {
+		var e = service[i];
+		$('#myDiv').append('<input type="checkbox" value="' + i + '" > ' + e.value + '<br>');
+	}
+
+	// $('#hello')
+	for (var i = 0; i < ipList.length; i++) {
+		$('#hello').append('<h2>' + ipList[i] + '</h2>')
+		$('#hello').append('<pre><code id="ipDiv' + i + '"/></pre>');
+	}
+
+
+
+	$('#btn').click(function () {
+		var now = (new Date()).toString("yyyyMMdd_HHmmss");
+		$('[id^=ipDiv]').html('');
+		var checkedBtns = $('#myDiv input:checked');
+
+		for (var i = 0; i < checkedBtns.size(); i++) {
+			var btn = checkedBtns.get(i)
+			var val = $(btn).val();
+			var serv = service[parseInt(val)]
+			for (var j = 0; j < serv.ip.length; j++) {
+				$('#ipDiv' + serv.ip[j]).append("ps -ef|grep {0} |grep -v grep|awk '{print $2}'| xargs kill -9 \n".format(serv.value)); //列出进程,并干沉
+				// 休息两秒,让进程慢慢关闭
+				$('#ipDiv' + serv.ip[j]).append('sleep 2; \n');
+				// 把备份目录创建好 
+				$('#ipDiv' + serv.ip[j]).append('mkdir -p {0}/bak/{1} \n'.format(serv.path, now));
+				$('#ipDiv' + serv.ip[j]).append('mv {0}/{1} {0}/bak/{2}/{1}\n'.format(serv.path, serv.value, now)); //把运行的程序移动到备份目录
+				// 从共享盘把要部署的东西移动到本地
+				$('#ipDiv' + serv.ip[j]).append('cp /root/{0} {1}/{0} \n'.format(serv.value, serv.path));
+				// 删除上传目录中的jar包
+				$('#ipDiv' + serv.ip[j]).append('rm -rf /root/{0} \n'.format(serv.value, serv.path));
+				// 进入要运行程序的目录 
+				$('#ipDiv' + serv.ip[j]).append('cd {0} \n'.format(serv.path));
+				// 清空日志文件
+				$('#ipDiv' + serv.ip[j]).append('> nohup.out \n');
+				$('#ipDiv' + serv.ip[j]).append('nohup java -jar  {0} {1}  > nohup.out 2>&1 & \n'.format(serv.value, ''));
+				$('#ipDiv' + serv.ip[j]).append('tailf nohup.out \n');
+				$('#ipDiv' + serv.ip[j]).append('yes | command or script \n');
+				//  --spring.profiles.active=cluster --spring.datasource.username=etc_issuer --spring.datasource.password=etc88@@nb
+				//  --spring.datasource.username=etc_issuer --spring.datasource.password=etc88@@nb
+				//后台运行,如果要跟数据库和密码.请继续往属性里写,占位符1就是属性
+			}
+		}
+	});
+	var selected = false;
+	// 进行服务的选项
+	$('#allSelect').click(function () {
+		selected = !selected;
+		$('#myDiv input[type=checkbox]').prop('checked', selected);
+	});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    01块级作用域：在一个函数内部；在一个代码块内部
+    注意：说白了{}大括号内的代码块即为let和const的作用域。
+    02我们都是知道在ES6以前，var关键字声明变量。无论声明在何处，都会被视为声明在函数的最顶部(不在函数内即在全局作用域的最顶部)。这就是函数变量提升。
+    03ES6 新增了let命令，用来声明变量。它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。
+ -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>el+var声明变量</title>
+</head>
+<style></style>
+
+<body>
+
+</body>
+<script>
+    var a = 1;
+    let b = 1;
+    const c = 3;
+    console.log("a", a);
+    console.log("b", b);
+    console.log("c", c);
+    if (true) {
+        var d = 4;
+        let e = 5;
+        const f = 6;
+    }
+    console.log("d", d);
+    // console.log("e", e);
+    // console.log("f", f);
+
+    function foo01() {
+        var g = 7;
+        console.log("g:", g);
+    }
+    foo01();
+    // console.log("g:", g);
+    function foo02() {
+        if (true) {
+            var h = 8;
+        }
+        console.log("h:", h);
+    }
+    foo02();
+    console.log("i:", i);
+    var i;
+    console.log("j", j);
+    let j;
+</script>
+
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<title>定时器操作</title>
+	<script type="text/javascript">
+		$(function () {
+			function timer() {
+				$.ajax({
+					url: "http://www.baidu.com",
+					type: "POST",
+					data: {},
+					dataType: "JSON",
+					success: function (data) {
+						// 在JS中将JSON的字符串解析成JSON数据格式，一般有两种方式：
+						// 1.一种为使用eval()函数。 2. 使用Function对象来进行返回解析。 
+						ajaxObj = eval("(" + data + ")");
+						if (ajaxObj.result = "true") {
+							$.messager.show(0, ajaxObj.orderMsg);
+						} else {
+							$.messager.show(0, "操作错误");
+						}
+					}
+				});
+			};
+			timer();
+			//轮询执行;5分(min)=300000毫秒(ms)一次;1分钟=600
+			setInterval('timer()', 600);
+		});
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>

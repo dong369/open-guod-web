@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <title>vue的生命周期+常用方法</title>
+</head>
+
+<body>
+    <div id="app">
+        {{q.show}} {{message}}
+        <button @click="doOnClick">点击事件</button>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        // 01选择html
+        el: "#app",
+        // 02初始化数据定义
+        data: {
+            message: "vue hello world",
+            q: {
+                show: false
+            }
+        },
+        // 03方法区
+        methods: {
+            doOnClick: function () {
+                alert("点击事件");
+            }
+        },
+        beforeCreate() {
+            alert();
+        },
+        // 04钩子函数（此时页面还没渲染）
+        created: function () {
+            alert($("#app").html() + "created钩子函数（此时页面还没渲染）");
+        },
+        // 05钩子函数（此时页面渲染完毕）
+        mounted: function () {
+            alert($("#app").html() + "mounted钩子函数（此时页面渲染完毕）");
+        }
+    });
+</script>
+
+</html>

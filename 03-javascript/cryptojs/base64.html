@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/cryptojs/tripledes.js"></script>
+    <title>数据加密</title>
+</head>
+
+<style>
+    #div {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div id="div" style="width: 500px;"></div>
+</body>
+
+<script>
+    // 将Base64编码字符串解码为原始二进制byte
+    var key = CryptoJS.enc.Base64.parse("isiGuRWo36Gny+Y0yOU+rhYfL4kvUiOD");
+    // 得到偏移量的二进制byte字节
+    var ivs = CryptoJS.enc.Utf8.parse('99999999');
+    // 加密
+    var encrypted = CryptoJS.TripleDES.encrypt("testtttest", key, {
+        iv: ivs,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    });
+    // 得到base64编码字符串密文 
+    var cipherStr = encrypted.toString();
+    console.log(cipherStr);
+
+    // 解密
+    var decrypted = CryptoJS.TripleDES.decrypt({
+        ciphertext: CryptoJS.enc.Base64.parse(cipherStr)
+    }, key, {
+        iv: ivs,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    });
+    // 转为UTF-8的原始数据
+    var data = decrypted.toString(CryptoJS.enc.Utf8);
+    console.log(data);
+</script>
+
+</html>

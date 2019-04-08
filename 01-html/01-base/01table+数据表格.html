@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>table表格数据+ajax动态加载数据</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+</head>
+
+<body>
+    <table id="detailTable" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>身高</th>
+                <th>出生年月</th>
+            </tr>
+        </thead>
+        <tbody id="table">
+            <tr></tr>
+        </tbody>
+    </table>
+</body>
+
+<script>
+    $(function () {
+        var jsondata = {
+            "makeId": 499098834702
+        };
+        $.ajax({
+            url: "http://10.9.4.164:7113/merchants/doCountMonth",
+            type: "POST",
+            // 解析成JSON字符串
+            data: JSON.stringify(jsondata),
+            dataType: "JSON",
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+                var tableData = data.rows;
+                for (var i = 0; i < tableData.length; i++) {
+                    var tr = "<tr><td>" +
+                        tableData[i].CUR_NUM + "</td><td>" +
+                        tableData[i].CREATE_TIME + "</td></tr>"
+                    $("#table").html(tr);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+</script>
+
+</html>

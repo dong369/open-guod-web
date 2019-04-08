@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../00-common/jsLibs/vue/vue.min.js"></script>
+    <title>vue事件入门</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="点击事件按钮" v-on:click="fun()">
+        <input type="button" value="点击事件按钮简写" @click="fun()">
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "点击事件"
+        },
+        methods: {
+            fun: function () {
+                alert(this.msg);
+            }
+        }
+    });
+</script>
+
+</html>

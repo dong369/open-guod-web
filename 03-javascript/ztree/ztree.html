@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../00-common/plugs/zTree_v3/css/metroStyle/metroStyle.css" type="text/css">
+    <script type="text/javascript" src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../00-common/plugs/zTree_v3/js/jquery.ztree.all.js"></script>
+</head>
+
+<body>
+    <div>
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+</body>
+
+<script>
+    var setting = {
+        view: {
+            addHoverDom: addHoverDom,
+            removeHoverDom: removeHoverDom,
+            selectedMulti: false
+        },
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        edit: {
+            enable: true
+        }
+    };
+
+    var zNodes;
+
+    /**
+     * 异步请求树的数据
+     */
+    $(document).ready(function () {
+        $.ajax({
+            url: "/03-javascript/ztree/ztree.json",
+            type: "get",
+            data: {},
+            dataType: "json",
+            success: function (ret) {
+                zNodes = ret;
+                console.log(zNodes);
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            }
+
+        });
+    });
+
+    var newCount = 1;
+
+    function addHoverDom(treeId, treeNode) {
+        var sObj = $("#" + treeNode.tId + "_span");
+        if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+        var addStr = "<span class='button add' id='addBtn_" + treeNode.tId +
+            "' title='add node' onfocus='this.blur();'></span>";
+        sObj.after(addStr);
+        var btn = $("#addBtn_" + treeNode.tId);
+        if (btn) btn.bind("click", function () {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.addNodes(treeNode, {
+                id: (100 + newCount),
+                pId: treeNode.id,
+                name: "new node" + (newCount++)
+            });
+            return false;
+        });
+    };
+
+    function removeHoverDom(treeId, treeNode) {
+        $("#addBtn_" + treeNode.tId).unbind().remove();
+    };
+</script>
+
+</html>

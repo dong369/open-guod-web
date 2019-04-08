@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>行布局+经典的行布局</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .header {
+            width: 800px;
+            height: 50px;
+            background: #333;
+            margin: 0 auto;
+            line-height: 50px;
+        }
+
+        .banner {
+            /*width: 800px;*/
+            width: 100%; /*多行布局某部分自适应*/
+            height: 300px;
+            background: #30a457;
+            margin: 0 auto;
+            line-height: 300px;
+        }
+
+        .container {
+            width: 800px;
+            height: 1000px;
+            background: #4c77f2;
+            margin: 0 auto;
+        }
+
+        .footer {
+            width: 800px;
+            height: 100px;
+            background: #333;
+            margin: 0 auto;
+            line-height: 100px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="header">这是页面的头部</div>
+<div class="banner">这是页面的banner图</div>
+<div class="container">这是页面的内容</div>
+<div class="footer">这是页面的底部</div>
+</body>
+</html>
