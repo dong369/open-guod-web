@@ -1,11 +1,10 @@
-layui.use(['jquery', 'table', 'laydate', 'layer', 'form', 'test01'], function () {
+layui.use(['jquery', 'table', 'laydate', 'layer', 'form'], function () {
     // 声明使用模块
     var table = layui.table,
         laydate = layui.laydate,
         layer = layui.layer,
         form = layui.form,
-        $ = layui.jquery,
-        test01 = layui.test01;
+        $ = layui.jquery;
     // 页面日期格式
     laydate.render({
         elem: '#startDate',
@@ -82,7 +81,7 @@ layui.use(['jquery', 'table', 'laydate', 'layer', 'form', 'test01'], function ()
                 }
 
             }, {
-                field: 'delete',
+                field: 'delete01',
                 title: '删除',
 
             }, {
@@ -226,7 +225,7 @@ layui.use(['jquery', 'table', 'laydate', 'layer', 'form', 'test01'], function ()
     }
 
     // 批量删除操作
-    function delete() {
+    function delete01() {
         var checkStatus = table.checkStatus('tableId');
         if (checkStatus.data.length == 0) {
             parent.layer.msg('请先选择要删除的数据行！', {
@@ -238,7 +237,7 @@ layui.use(['jquery', 'table', 'laydate', 'layer', 'form', 'test01'], function ()
         idsArr = [];
         data.forEach(function (n, i) {
             idsArr.push(n.id);
-		})
+        })
         // 方式02
         var ids = "";
         for (var i = 0; i < checkStatus.data.length; i++) {
