@@ -70,8 +70,9 @@
 		};
 		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
 		for (let k in o)
-			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[
-				k]).substr(("" + o[k]).length)));
+			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : ((
+				"00" + o[
+					k]).substr(("" + o[k]).length)));
 		return fmt;
 	};
 
@@ -115,12 +116,14 @@
 			var val = $(btn).val();
 			var serv = service[parseInt(val)]
 			for (var j = 0; j < serv.ip.length; j++) {
-				$('#ipDiv' + serv.ip[j]).append("ps -ef|grep {0} |grep -v grep|awk '{print $2}'| xargs kill -9 \n".format(serv.value)); //列出进程,并干沉
+				$('#ipDiv' + serv.ip[j]).append("ps -ef|grep {0} |grep -v grep|awk '{print $2}'| xargs kill -9 \n"
+					.format(serv.value)); //列出进程,并干沉
 				// 休息两秒,让进程慢慢关闭
 				$('#ipDiv' + serv.ip[j]).append('sleep 2; \n');
 				// 把备份目录创建好 
 				$('#ipDiv' + serv.ip[j]).append('mkdir -p {0}/bak/{1} \n'.format(serv.path, now));
-				$('#ipDiv' + serv.ip[j]).append('mv {0}/{1} {0}/bak/{2}/{1}\n'.format(serv.path, serv.value, now)); //把运行的程序移动到备份目录
+				$('#ipDiv' + serv.ip[j]).append('mv {0}/{1} {0}/bak/{2}/{1}\n'.format(serv.path, serv.value,
+					now)); //把运行的程序移动到备份目录
 				// 从共享盘把要部署的东西移动到本地
 				$('#ipDiv' + serv.ip[j]).append('cp /root/{0} {1}/{0} \n'.format(serv.value, serv.path));
 				// 删除上传目录中的jar包
@@ -129,7 +132,8 @@
 				$('#ipDiv' + serv.ip[j]).append('cd {0} \n'.format(serv.path));
 				// 清空日志文件
 				$('#ipDiv' + serv.ip[j]).append('> nohup.out \n');
-				$('#ipDiv' + serv.ip[j]).append('nohup java -jar  {0} {1}  > nohup.out 2>&1 & \n'.format(serv.value, ''));
+				$('#ipDiv' + serv.ip[j]).append('nohup java -jar  {0} {1}  > nohup.out 2>&1 & \n'.format(serv
+					.value, ''));
 				$('#ipDiv' + serv.ip[j]).append('tailf nohup.out \n');
 				$('#ipDiv' + serv.ip[j]).append('yes | command or script \n');
 				//  --spring.profiles.active=cluster --spring.datasource.username=etc_issuer --spring.datasource.password=etc88@@nb
