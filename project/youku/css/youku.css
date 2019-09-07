@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+/* 整个头部 */
+.headerBox {
+    height: 60px;
+    background: azure;
+}
+
+/* 图标 */
+.logo {
+    padding-top: 16px;
+    width: 320px;
+}
+
+/* 搜索框+搜索按钮 */
+.searchBox {
+    width: 320px;
+    margin-top: 10px;
+    position: relative;
+}
+
+/* 搜索输入框 */
+.search_input {
+    width: 228px;
+    height: 40px;
+    line-height: 36px;
+    border: 2px solid #999999;
+    border-right: none;
+    padding: 0 6px;
+    font-size: 14px;
+}
+
+/* 搜索按钮 */
+.search_btn {
+    width: 90px;
+    height: 40px;
+    border: 2px solid #999999;
+    padding: 0;
+    background: url(../images/search_btn.jpg) left top no-repeat;
+}
+
+/* 搜索交互，使用js添加的 */
+.search_hover {
+    border-color: #3eabaa;
+}
+
+/* 列表框 */
+.search_show {
+    width: 440px;
+    border: 2px solid #3eabff;
+    position: absolute;
+    left: 0;
+    top: 38px;
+    padding: 2px 3px;
+    background: #ffffff;
+    display: none;
+}
+
+.search_list {
+    width: 259px;
+    font-size: 14px;
+    border-top: 1px solid #f3f3f3;
+    border-right: 1px solid #f3f3f3;
+}
+
+.search_list li {
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #f3f3f3;
+    padding: 0 8px 0 5px;
+}
+
+.search_list li:hover {
+    background: #f3f3f3;
+}
+
+.search_list li a {
+    float: left;
+    color: #8f8f8f;
+}
+
+.search_list li span {
+    float: right;
+    font-size: 12px;
+    color: #8f8f8f;
+}
+
+.imgShow {
+    width: 170px;
+    background: #f3f3f3;
+    padding-left: 8px;
+    display: none;
+}
+
+.imgShow dt {
+    width: 70px;
+    float: left;
+}
+
+.imgShow dt img {
+    width: 70px;
+    height: 105px;
+    display: block;
+    background: url(../images/test.jpg)
+}
+
+.imgShow dd {
+    width: 80px;
+    float: right;
+}
+
+.imgShow dd h3 {
+    font-size: 16px;
+}
+
+.imgShow dd p {
+    color: #909090;
+    line-height: 22px;
+}
+
+.imgShow_play {
+    width: 53px;
+    height: 24px;
+    background: url(../images/search_btn.jpg) left top no-repeat;
+    display: inline-block;
+}
+
+
+.menu li {
+    float: left;
+}
+
+.menuTxt {
+    height: 24px;
+    line-height: 24px;
+    padding: 18px 12px;
+}
+
+.menuTxt a {
+    color: #535353;
+}
+
+
+.menuTxt span {
+    padding: 0 5px;
+}
+
+.login {
+    background: url(../images/icon/head.png) left center no-repeat;
+    padding-left: 20px;
+}
+
+.record {
+    background: url(../images/icon/time.png) left center no-repeat;
+    padding-left: 20px;
+}
+
+.upload {
+    background: url(../images/icon/up.png) left center no-repeat;
+    padding-left: 20px;
+}

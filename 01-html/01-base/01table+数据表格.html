@@ -23,7 +23,6 @@
             </tr>
         </thead>
         <tbody id="table">
-            <tr></tr>
         </tbody>
     </table>
 </body>
@@ -31,10 +30,14 @@
 <script>
     $(function () {
         var jsondata = {
-            "makeId": 499098834702
+            "drugName": "疾病",
+            "endTime": "2020-01-01",
+            "page": 1,
+            "size": 10,
+            "startTime": "2017-01-01"
         };
         $.ajax({
-            url: "http://10.9.4.164:7113/merchants/doCountMonth",
+            url: "http://127.0.0.1:8082/bsh-drug/api/selectHospitalAllInfo",
             type: "POST",
             // 解析成JSON字符串
             data: JSON.stringify(jsondata),
@@ -42,18 +45,21 @@
             contentType: "application/json",
             success: function (data) {
                 console.log(data);
-                var tableData = data.rows;
+                var tableData = data.data;
                 for (var i = 0; i < tableData.length; i++) {
-                    var tr = "<tr><td>" +
-                        tableData[i].CUR_NUM + "</td><td>" +
-                        tableData[i].CREATE_TIME + "</td></tr>"
+                    var tr = "<tr><a><td class='test'>" + tableData[i].itemName + "</td></a><td>" +
+                        tableData[i].hospital + "</td></tr>"
                     $("#table").html(tr);
                 }
             },
             error: function (data) {
                 console.log(data);
             }
+           
         });
+        $(".test").click(function(){
+            alert()
+        })
     });
 </script>
 
