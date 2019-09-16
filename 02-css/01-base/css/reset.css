@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+body,
+div,
+span,
+form,
+input,
+button,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd,
+ol,
+ul,
+li {
+    margin: 0px;
+    padding: 0px;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+
+a {
+    text-decoration: none;
+    display: block;
+}
+
+img {
+    border: none;
+    display: block;
+}
+
+
+.clearfloat {
+    zoom: 1;
+}
+
+.clearfloat:after {
+    content: "";
+    height: 0;
+    display: block;
+    visibility: hidden;
+    /* overflow: hidden; */
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:after {
+    content: '';
+    display: table;
+    clear: both;
+}
