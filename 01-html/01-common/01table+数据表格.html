@@ -47,7 +47,8 @@
                 console.log(data);
                 var tableData = data.data;
                 for (var i = 0; i < tableData.length; i++) {
-                    var tr = "<tr><a><td class='test'>" + tableData[i].itemName + "</td></a><td>" +
+                    var tr = "<tr><a><td class='test'>" + tableData[i].itemName +
+                        "</td></a><td>" +
                         tableData[i].hospital + "</td></tr>"
                     $("#table").html(tr);
                 }
@@ -55,9 +56,9 @@
             error: function (data) {
                 console.log(data);
             }
-           
+
         });
-        $(".test").click(function(){
+        $(".test").click(function () {
             alert()
         })
     });

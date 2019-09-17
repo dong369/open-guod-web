@@ -1,6 +1,6 @@
-/**
- 方法：layui.define([mods], callback),定义模块;扩展一个config模块;提示：模块也可以依赖其它模块，如：layui.define('layer', callback)
- **/
+/*
+ *方法：layui.define([mods], callback),定义模块;扩展一个config模块;提示：模块也可以依赖其它模块，如：layui.define('layer', callback)
+ * */
 
 layui.define(function (exports) {
     var config = {
