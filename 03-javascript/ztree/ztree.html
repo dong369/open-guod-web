@@ -33,7 +33,18 @@
         },
         edit: {
             enable: true
+        },
+        callback: { //回调函数
+            onClick: function (event, treeId, treeNode) { //点击每个节点回调
+            alert();
+
+
+            },
+            onAsyncSuccess: function (event, treeId, treeNode, msg) { //树结构加载完后回调
+                alert();
+            }
         }
+
     };
 
     var zNodes;

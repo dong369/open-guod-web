@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>智能搜索</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .search {
+        margin: 20px;
+    }
+
+    .search-text {
+        width: 400px;
+        height: 40px;
+        border: 1px solid #3385FF;
+        /*提示字首行缩进*/
+        text-indent: 10px;
+        /*去掉蓝色高亮框*/
+        outline: none;
+        /*用浮动解决内联元素错位及小间距的问题*/
+        float: left;
+    }
+
+    .search_sub {
+        width: 100px;
+        height: 42px;
+        background: #3385FF;
+        /*去掉submit按钮默认边框*/
+        border: 0px;
+        /*改成右浮动也是可以的*/
+        float: left;
+        /*搜索的字体颜色为白色*/
+        color: white;
+        /*鼠标变为小手*/
+        cursor: pointer;
+    }
+
+    .search .tips-list {
+        width: 400px;
+        border: 1px solid #cccccc;
+    }
+</style>
+
+<body>
+    <div class="search">
+        <input type="text" autocomplete="off" class="search-text" placeholder="请输入搜索内容">
+        <input type="submit" value="搜索" class="search_sub">
+        <div class="tips-list">java</div>
+    </div>
+</body>
+
+<script src="../../00-common/jsLibs/jquery/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    // 鼠标点击输入框提示历史记录
+    $(".search-text").on("click", function () {
+        $.get("keyup", function (data) {});
+    });
+    // 输入关键词智能提示
+    $(function () {
+        $(".search-text").on("keyup", function () {
+            let word = this.value;
+            $.post("keyup", {
+                "word": word
+            }, function (data) {});
+        });
+    });
+    // 点击搜索
+</script>
+
+</html>

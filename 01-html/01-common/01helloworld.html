@@ -8,24 +8,32 @@
     <title>第一个页面</title>
 </head>
 
-<style>
-    ul>li {
-        background: red
-    }
-</style>
-
 <body>
-    <div>
-        <ul>
-            <li>test</li>
-            <li>test</li>
-        </ul>
-    </div>
-</body>
+    <input type="text" name="" onchange="importf('http\://211.144.5.80:30117/')">
+    <div id="tableau"></div>
+    <script src="https://cdn.bootcss.com/xlsx/0.15.1/xlsx.core.min.js"></script>
+    <script>
+        //导入importf()
+        importf();
 
-<script>
-    var lis = document.getElementsByTagName("li");
-    console.log(lis.length);
-</script>
+        function importf() {
+            var f = "http://211.144.5.80:30117/file/2019/11/111201911201832389000.xls";
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var data = e.target.result;
+                var wb = XLSX.read(data, {
+                    type: 'binary'
+                });
+                console.log(wb)
+                var worksheet = wb.Sheets[wb.SheetNames[0]];
+                var container = document.getElementById('tableau');
+                container.innerHTML = XLSX.utils.sheet_to_html(worksheet);
+
+            };
+            reader.readAsDataURL(f);
+
+        }
+    </script>
+</body>
 
 </html>

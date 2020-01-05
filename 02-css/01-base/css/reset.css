@@ -41,7 +41,6 @@ img {
     display: block;
 }
 
-
 .clearfloat {
     zoom: 1;
 }
@@ -51,16 +50,18 @@ img {
     height: 0;
     display: block;
     visibility: hidden;
-    /* overflow: hidden; */
+    overflow: hidden;
+    clear: both;
+}
+
+
+/* 清除浮动 */
+.clearfix:after {
+    content: '';
+    display: table;
     clear: both;
 }
 
 .clearfix {
     *zoom: 1;
-}
-
-.clearfix:after {
-    content: '';
-    display: table;
-    clear: both;
 }
