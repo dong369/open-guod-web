@@ -7,9 +7,9 @@
 	<script>
 		// 10.237.3.13上面启动了个app-zuul,不知道啥用,未加
 		var ipList = [
-			// 阿里云服务地址:[0]
+			// 阿里云应用地址:[0]
 			"10.238.2.104",
-			// 发行系统4A服务:[1]
+			// 发行系统4A应用:[1]
 			"10.237.5.13",
 			// 95呼叫中心系统:[2]
 			"10.248.10.66",
@@ -19,7 +19,7 @@
 			"10.9.254.182"
 		]
 		var service = [{
-			name: "RMS系统-Three服务器",
+			name: "RMS系统-Three应用器",
 			value: "rms_three-1.0.0.jar",
 			path: "/usr/local/rms/three",
 			ip: [0]
@@ -143,7 +143,7 @@
 		}
 	});
 	var selected = false;
-	// 进行服务的选项
+	// 进行应用的选项
 	$('#allSelect').click(function () {
 		selected = !selected;
 		$('#myDiv input[type=checkbox]').prop('checked', selected);

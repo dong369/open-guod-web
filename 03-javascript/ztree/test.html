@@ -1,22 +1,56 @@
 <!DOCTYPE html>
-
-<head>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>左右区域自动拖拽伸缩</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../00-common/plugs/zTree_v3/css/metroStyle/metroStyle.css" type="text/css">
-    <script type="text/javascript" src="../../00-common/jsLibs/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="../../00-common/plugs/zTree_v3/js/jquery.ztree.all.js"></script>
 </head>
-
+<style>
+    body,ul{margin: 0;padding: 0;position: absolute;top: 0;right: 0;bottom: 0;left: 0}
+    .container{color: #fff;text-align: center; height: 100%;font-size: 40px;}
+    /*清除浮动*/
+    .container:after{content: '';display: block;height: 0;clear: both;}
+    .left{float: left;width: 240px;height: 100%;background-color: #e7ba6f;}
+    .center{float: left;width: 4px; height:100%;background-color: #e7001d;cursor: ew-resize}
+    .right{margin-left: 240px;height: 100%;background-color: #b6ecff;}
+</style>
 <body>
-    <div>
-        <ul id="treeDemo" class="ztree"></ul>
+<div class="container">
+    <div class="left">
+            <a id="treeDemo" class="ztree"></a>
     </div>
-</body>
-
+    <div class="center"></div>
+    <div class="right">
+        右边区域
+    </div>
+</div>
 <script>
+    function dragBox(left,center,right){
+        center.off('mousedown').on("mousedown", function (e) {
+            e = e||window.event;
+            e.preventDefault();
+            var me = left,x = e.clientX - me.width();
+            $(document).on("mousemove", mouseMove).on("mouseup", mouseUp);
+            //移动事件
+            function mouseMove(e) {
+                e = e||window.event;
+                left.css('width',e.clientX - x);
+                right.css('margin-left',e.clientX - x);
+            }
+            //停止事件
+            function mouseUp() {
+                //卸载事件
+                $(document).off("mousemove", mouseMove).off("mouseup", mouseUp);
+            }
+        });
+    }
+    var left = $('.left');
+    var center = $('.center');
+    var right = $('.right');
+    dragBox(left,center,right);
+
     var setting = {
         view: {
             addHoverDom: addHoverDom,
@@ -91,5 +125,5 @@
         $("#addBtn_" + treeNode.tId).unbind().remove();
     };
 </script>
-
+</body>
 </html>

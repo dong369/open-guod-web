@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div class="layui-fluid main">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief">
+
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show layui-form">
+                        <div class="product-list-filter">
+                            <form action="" method="post">
+
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline">
+                                        <select name="type" id="type" lay-filter="filter0">
+                                            <option value="week" selected="selected">按照周统计</option>
+                                            <option value="month">按照月统计</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="date1" name="date1" lay-verify="date1"
+                                            class="layui-input test-item" readonly="readonly" style="width:200px;"
+                                            value="" />
+                                        <input type="text" id="date2" name="date2" lay-verify="date2"
+                                            class="layui-input test-item" style="width:200px;" value="" />
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline"><input type="button" class="layui-btn wy-btn"
+                                            onclick="submit001()" value="搜索" /></div>
+                                    <!--  <div class="layui-input-inline"><input type="button" class="layui-btn wy-btn" onclick="tongji()" value="开发统计"/></div>  -->
+                                </div>
+                            </form>
+                        </div>
+                        <!--product-list-filter-->
+
+                    </div>
+                </div>
+            </div>
+            <!--layui-tab-->
+        </div>
+        <!--layui-row-->
+    </div>
+    <!--main-->
+</body>
+<script>
+    layui.use(['form', 'laydate'], function () {
+        var form = layui.form,
+            layer = layui.layer;
+        var laydate = layui.laydate;
+
+        //时间选择器
+        laydate.render({
+            elem: '#date1',
+            format: "yyyy-MM-dd~yyyy-MM-dd",
+            btns: ['clear', 'now'],
+            trigger: 'click',
+            done: function (value, date, endDate) {
+                if (value != "" && value.length > 0) {
+                    var today = new Date(value.substring(0, 10));
+                    var weekday = today.getDay();
+                    var monday;
+                    var sunday;
+                    if (weekday == 0) {
+                        monday = new Date(1000 * 60 * 60 * 24 * (weekday - 6) + today.getTime());
+                    } else {
+                        monday = new Date(1000 * 60 * 60 * 24 * (1 - weekday) + today.getTime());
+                    }
+                    if (weekday == 0) {
+                        sunday = today;
+                    } else {
+                        sunday = new Date(1000 * 60 * 60 * 24 * (7 - weekday) + today.getTime());
+                    }
+                    var month = monday.getMonth() + 1;
+                    if (month < 10) {
+                        month = "0" + month;
+                    }
+                    var day1 = monday.getDate();
+                    if (day1 < 10) {
+                        day1 = "0" + day1;
+                    }
+                    var start = "" + monday.getFullYear() + "-" + month + "-" + day1;
+                    var month2 = sunday.getMonth() + 1;
+                    if (month2 < 10) {
+                        month2 = "0" + month2;
+                    }
+                    var day2 = sunday.getDate();
+                    if (day2 < 10) {
+                        day2 = "0" + day2;
+                    }
+                    var end = "" + sunday.getFullYear() + "-" + month2 + "-" + day2;
+                    $("#date1").val(start + "~" + end);
+                } else {
+                    $("#date1").val('');
+                }
+            }
+        });
+        //时间选择器
+        laydate.render({
+            elem: '#date2',
+            type: 'month'
+        });
+
+        form.on('select(filter0)', function (data) {
+            $("#date1").val("");
+            $("#date2").val("");
+            var type = $("#type option:selected").val();
+            if (type == "week") {
+                $("#date1").show();
+                $("#date2").hide();
+            } else {
+                $("#date1").hide();
+                $("#date2").show();
+            }
+        });
+        $(document).ready(function () {
+
+            $("#date1").show();
+            $("#date2").hide();
+
+        });
+    });
+    //提交搜索的点击事件，将时间拼接一下
+    function submit001() {
+
+        var type = $("#type option:selected").val();
+        var date = "";
+        if (type == "week") {
+            date = $("#date1").val();
+            alert(date)
+        } else {
+            date = $("#date2").val();
+            alert(date)
+        }
+        if (date == "") {
+            errTips('请选择查询的日期!');
+        }
+    }
+</script>
+
+</html>

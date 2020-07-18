@@ -23,7 +23,7 @@
         $("#username").blur(function () {
             //1、失去焦点获得输入框的内容
             var usernameInput = $(this).val();
-            //2、去服务端校验该用户名是否存在---ajax
+            //2、去应用端校验该用户名是否存在---ajax
             $.post(
                 "${pageContext.request.contextPath}/checkUsername", {
                     "username": usernameInput

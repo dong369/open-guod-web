@@ -189,7 +189,7 @@ layui.use(['jquery', 'table', 'laydate', 'layer', 'form'], function () {
                 console.log(data);
                 var adminData = data.rows;
                 $.each(adminData, function (index, data) {
-                    var deptOption = $("<option value='" + data.id + "'>" + data.nickname + "</option>");
+                    var deptOption = $("<option value='" + data.id + "'>" + data.nickName + "</option>");
                     $(".selectAdmin").append(deptOption);
                 });
                 form.render("select");
@@ -218,7 +218,7 @@ layui.use(['jquery', 'table', 'laydate', 'layer', 'form'], function () {
     // 重置按钮
     function reset() {
         $('input[name="username"]').val('');
-        $('input[name="nickname"]').val('');
+        $('input[name="nickName"]').val('');
         $('input[name="jobnumber"]').val('');
         $('input[name="password"]').val('');
         $('input[name="phone"]').val('');

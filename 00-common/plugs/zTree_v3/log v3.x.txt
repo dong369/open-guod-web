@@ -170,7 +170,7 @@
    * [修正] 1-2-3 3级节点时，如果 2级节点 全部设置为 nocheck 或 chkDisabled后，勾选3级节点时，1级节点的半勾选状态错误的 bug
    * [修改] Demo: checkbox_nocheck.html & checkbox_chkDisabled.html;
    * [修改] Demo: edit_super.html，增加 showRenameBtn & showRemoveBtn 的演示
-   * [修改] Demo: asyncForAll, 将 post 修改为 get；为了避免由于 IE10 的 bug 造成的客户端 以及 服务端崩溃
+   * [修改] Demo: asyncForAll, 将 post 修改为 get；为了避免由于 IE10 的 bug 造成的客户端 以及 应用端崩溃
       IE10 ajax Post 无法提交参数的bug (http://bugs.jquery.com/ticket/12790)
 
 *2012.12.21* v3.5.01

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>复杂表头+select下拉框默认值+单元格合并</title>
+    <script src="../../libs/layui-v2.4.5/layui/layui.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../libs/layui-v2.4.5/layui/css/layui.css">
+    <style>
+        /*select下拉框显示*/
+        td[data-field="qualityStatus"]>div {
+            overflow: inherit;
+        }
+
+        /*去除行点击、hover背景色*/
+        .layui-table tbody tr:hover,
+        .layui-table-hover,
+        .layui-table-click {
+            background-color: rgba(255, 255, 255, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <table class="layui-hide" id="qua_standard_table" lay-filter="qua_standard_table"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    layui.use(['element', 'upload', 'laydate', 'table', 'form'], function () {
+        var element = layui.element,
+            table = layui.table,
+            laypage = layui.laypage,
+            form = layui.form,
+            upload = layui.upload,
+            laydate = layui.laydate;
+        //主页面数据
+        table.render({
+            elem: '#qua_standard_table',
+            id: 'qua_standard_table',
+            url: 'http://localhost:8088/drug_platform/es/tableCount',
+            // data: selectdata,
+            method: 'POST',
+            // 02用于对分页请求的参数：page、limit重新设定名称
+            request: {
+                pageName: 'page',
+                limitName: 'rows'
+            },
+            // 03重新规定返回的数据格式（根据后台返回格式定）
+            response: {
+                dataName: 'data',
+                statusCode: '200',
+                countName: 'total'
+            },
+            title: '数据表',
+            height: 'full-60',
+            cellMinWidth: 120,
+            size: 'lg',
+            cols: [
+                [{
+                        align: 'center',
+                        rowspan: 2,
+                        title: '序号',
+                        width: 50,
+                        type: 'numbers',
+                        field: 'num',
+                        fixed: 'left'
+                    },
+                    {
+                        align: 'center',
+                        rowspan: 2,
+                        field: 'hospitalName',
+                        width: 200,
+                        title: '医院名称',
+                        fixed: 'left'
+                    },
+                    {
+                        align: 'center',
+                        title: '病人数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '门诊数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '住院数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '诊断数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '用药数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '影像数据',
+                        colspan: 3
+                    },
+                    {
+                        align: 'center',
+                        title: '检验数据',
+                        colspan: 3
+                    }
+                ],
+                [{
+                        align: 'center',
+                        field: 'patientStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'patientEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'patientCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'clinicStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'clinicEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'clinicCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'visitStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'visitEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'visitCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'diagnosisStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'diagnosisEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'diagnosisCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'medicationStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'medicationEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'medicationCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'pacsStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'pacsEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'pacsCount',
+                        title: '记录数量'
+                    },
+                    {
+                        align: 'center',
+                        field: 'lisStartTime',
+                        title: '开始日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'lisEndTime',
+                        title: '结束日期',
+                        width: 160
+                    },
+                    {
+                        align: 'center',
+                        field: 'lisCount',
+                        title: '记录数量'
+                    }
+                ]
+            ]
+        });
+    });
+</script>
+
+</html>
