@@ -2499,7 +2499,7 @@
                         if (!m(p)) {
                             f = !0, h(t, n);
                             break
-                        }!f && a.class && Ye(a.class)
+                        }! f && a.class && Ye(a.class)
                 }
             } else e.data !== t.text && (e.data = t.text);
             return !0

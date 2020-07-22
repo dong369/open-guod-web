@@ -130,14 +130,13 @@
         return config(route)
       case 'boolean':
         return config ? route.params : undefined
-      default:
-        {
-          warn(
-            false,
-            "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
-            "expecting an object, function or boolean."
-          );
-        }
+      default: {
+        warn(
+          false,
+          "props in \"" + (route.path) + "\" is a " + (typeof config) + ", " +
+          "expecting an object, function or boolean."
+        );
+      }
     }
   }
 
@@ -1216,11 +1215,8 @@
       redirect: route.redirect,
       beforeEnter: route.beforeEnter,
       meta: route.meta || {},
-      props: route.props == null ?
-        {} :
-        route.components ?
-        route.props :
-        {
+      props: route.props == null ? {} : route.components ?
+        route.props : {
           default: route.props
         }
     };
@@ -1253,8 +1249,7 @@
 
     if (route.alias !== undefined) {
       var aliases = Array.isArray(route.alias) ?
-        route.alias :
-        [route.alias];
+        route.alias : [route.alias];
 
       aliases.forEach(function (alias) {
         var aliasRoute = {
@@ -2536,10 +2531,9 @@
       case 'abstract':
         this.history = new AbstractHistory(this, options.base);
         break
-      default:
-        {
-          assert(false, ("invalid mode: " + mode));
-        }
+      default: {
+        assert(false, ("invalid mode: " + mode));
+      }
     }
   };
 
